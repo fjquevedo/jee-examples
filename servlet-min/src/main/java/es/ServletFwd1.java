@@ -31,7 +31,7 @@ public class ServletFwd1 extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/samples/servletFwd2");
 				rd.forward(request, response);
 			} else {
-				out.print("Sorry UserName or Password Error!");
+				out.print("Sorry UserName Error! Try with 'servlet'");
 				RequestDispatcher rd = request.getRequestDispatcher("/samples/samples.html");
 				rd.include(request, response);
 			}
