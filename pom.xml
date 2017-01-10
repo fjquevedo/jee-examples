@@ -16,6 +16,7 @@
 	<modules>
 		<module>simple-web</module>
 		<module>servlet-min</module>
+		<module>jsf-min</module>
 	</modules>
 	<build>
 		<pluginManagement>
