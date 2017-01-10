@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>JSF 2.2: Simple JSF</title>
+</h:head>
+<h:body>
+	<h1>JSF 2.2: Simple JSF</h1>
+	<p>JSF establece el estandar para la construcción de UI basado en
+		componentes web.</p>
+
+	<ul>
+		<li>JSF trae componentes (tags) predefinidos y api controlar sus
+			eventos.</li>
+		<li>Puede ser utilizado como framework MVC: creación de
+			formularios, control de eventos, validación de datos, invocación de
+			una lógica de negocio y generación de resultados.</li>
+		<li>Tiene soporte para AJAX. También se puede utilizar jQuery o
+			GWT(Google Web Toolkit).</li>
+	</ul>
+
+	<div align="center">
+		<fieldset>
+			<legend>JSF Test Form</legend>
+			<h:form>
+  Some random data: <h:inputText value="#{someBean.someProperty}" />
+				<br />
+				<!-- Corresponds to getSomeProperty and setSomeProperty -->
+				<!-- Calls "someActionControllerMethod" and uses return value as base name of page to navigate to. -->
+				<h:commandButton value="Go to Page B"
+					action="#{someBean.someActionControllerMethod}" />
+			</h:form>
+		</fieldset>
+	</div>
+	<p>
+		If the tags like h:form and h:commandButton are totally ignored, it
+		probably means that you don't have the JSF JAR file in WEB-INF/lib,
+		that you haven't mapped the FacesServlet in web.xml, or that you used
+		the wrong URL (i.e, ending in page-a.<b>xhtml</b> instead of page-a.<b>jsf</b>).
+	</p>
+	<p>Note: when making your own facelets pages (i.e., JSF .xhtml
+		pages) in a project based on this jsf-blank project, copy the template
+		files from the "samples" folder to the top-level WebContent folder,
+		then rename the files. Do NOT use this page directly, since this page
+		has many extraneous entries.</p>
+
+
+
+
+
+
+	<hr style="margin-top: 100px" />
+	<p style="font-size: 60%">
+		All code from the <a
+			href="http://courses.coreservlets.com/Course-Materials/">
+			coreservlets.com J2EE tutorials: JSF 2.2, PrimeFaces, Java 7
+			programming, Java 8 lambdas and streams, Hadoop, Ajax with jQuery,
+			GWT, Spring, Hibernate, JPA, SOAP-based and RESTful Web Services,
+			Android development, servlets, and JSP</a>. There are also <a
+			href="http://courses.coreservlets.com/">live instructor-led
+			training courses on the same Java EE topics: JSF 2.2, PrimeFaces,
+			Java 7 programming, Java 8 lambdas and streams, Hadoop, Ajax with
+			jQuery, GWT, Spring, Hibernate, JPA, SOAP-based and RESTful Web
+			Services, Android development, servlets, and JSP</a>. Email <a
+			href="mailto:info@coreservlets.com">info@coreservlets.com</a> to
+		inquire about customized versions of these courses taught onsite at <i>your</i>
+		organization or for consulting/development support from Marty Hall.
+		Also see the <a href="http://www.coreservlets.com/JSF-Tutorial/jsf2/">JSF
+			2.2 tutorial</a>, the <a
+			href="http://www.coreservlets.com/JSF-Tutorial/primefaces/">PrimeFaces
+			tutorial</a>, and <a
+			href="http://courses.coreservlets.com/about-instructor.html">information
+			about Marty Hall, the training course instructor</a>.
+	</p>
+</h:body>
+</html>

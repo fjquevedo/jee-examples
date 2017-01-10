@@ -15,8 +15,7 @@
 	</dependencies>
 	<modules>
 		<module>simple-web</module>
-		
-		
+		<module>servlet-min</module>
 	</modules>
 	<build>
 		<pluginManagement>
