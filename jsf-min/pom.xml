@@ -1,45 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>es</groupId>
 	<artifactId>jsf-min</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>jsf-min</name>
-	<dependencies>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-		<dependency>
-			<!-- https://javaserverfaces.java.net/ -->
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.14</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-	</dependencies>
-	<build>
-		<finalName>jsf-min</finalName>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-						<encoding>UTF-8</encoding>
-						<showWarnings>true</showWarnings>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+	<parent>
+		<groupId>jee-examples</groupId>
+		<artifactId>jee-examples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<profiles>
+		<profile>
+			<id>tomcat</id>
+			<dependencies>
+				<!-- javax.faces-xxx.jar or (jsf-api-xxx.jar (javax.faces) + jsf-impl-xxx.jar (com.sun.faces)) -->
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.2.14</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>
