@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Servlet - LifeCycle</title>
+</head>
+<body>
+	<h1>Servlet - LifeCycle</h1>
+
+	<h2>Init</h2>
+	Servlet container (e.g., Tomcat or Glassfish) invokes the
+	init(ServletConfig) method of the servlet, providing a ServletConfig
+	object as an argument. init() runs only once. It is usually used to
+	read persistent configuration data and initialize costly resource.
+	<br> This ServletConfig object allows the servlet to access
+	initialization parameters for this particular servlet. These parameters
+	are defined in the web application deployment descriptor file (i.e.,
+	“web.xml”), under the servlet's name, as follows:
+	<br>
+
+	<pre style="background-color: rgb(215, 236, 211);" class=" ">&lt;servlet&gt;
+   &lt;servlet-name&gt;<strong>ServletName</strong>&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;<strong>ServletClassFile</strong>&lt;/servlet-class&gt;
+   &lt;init-param&gt;
+      &lt;param-name&gt;initParam1&lt;/param-name&gt;
+      &lt;param-value&gt;initParam1Value&lt;/param-value&gt;
+   &lt;/init-param&gt;
+   &lt;init-param&gt;
+      &lt;param-name&gt;initParam2&lt;/param-name&gt;
+      &lt;param-value&gt;initParam2Value&lt;/param-value&gt;
+   &lt;/init-param&gt;
+&lt;/servlet&gt;</pre>
+
+	<p>
+		The
+		<code>ServletConfig</code>
+		interface defines these methods to retrieve the initialization
+		parameters for this servlet.
+	</p>
+	<pre style="background-color: rgb(215, 236, 211);">String <strong>getInitParameter</strong>(String name)
+java.util.Enumeration <strong>getInitParameterNames</strong>()</pre>
+	<pre style="background-color: rgb(215, 236, 211);">public void init(ServletConfig config) throws ServletException {
+   <span class="color-comment">// Read all the init parameters for this servlet</span>
+   Enumeration e = config.getInitParameterNames();
+   while (e.hasMoreElements()) {
+      String initParamName = (String)e.nextElement();
+      String initParamValue = config.getInitParameter(initParamName);
+      ......
+   }
+}</pre>
+
+	<h2>Service</h2>
+	<p>Once a servlet is initialized, the servlet container invokes its
+		service() method to handle client requests. This method is called once
+		for each request. Generally, the servlet container handle concurrent
+		request to the same servlet by running service() on different threads
+		(unless SingleThreadModel interface is declared). For HttpServlet,
+		service() dispatches doGet(), doPost(), doHead(), doOptions(),
+		doTrace(), etc, to handle HTTP GET, POST, HEAD, OPTIONS, TRACE, etc,
+		request respectively. The service() method of an HttpServlet takes two
+		arguments, an HttpServletRequest object and an HttpServletResponse
+		object that corresponds to the HTTP request and response messages
+		respectively.</p>
+	<h2>Destroy</h2>
+	<p>When the servlet container decides that a servlet should be
+		removed from the container (e.g., shutting down the container or
+		time-out, which is implementation-dependent), it calls the destroy()
+		method to release any resource it is using and save any persistent
+		state. Before the servlet container calls the destroy(), it must allow
+		all service() threads to complete or time-out.</p>
+	<p style="font-size: 60%; text-align: center;">
+		<a href="../">HOME</a>
+	</p>
+
+</body>
+</html>
