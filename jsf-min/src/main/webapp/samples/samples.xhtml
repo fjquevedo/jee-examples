@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>JSF 2.2: Simple JSF</title>
+</h:head>
+<h:body>
+
+	
+	aaaa<h:inputText value="#{someBean.someProperty}" maxlength="20" label="sssssssss"/>
+	
+	<div align="center">
+		<fieldset>
+			<legend>JSF Test Form</legend>
+			<h:form>
+  Some random data: <h:inputText value="#{someBean.someProperty}" /> ssss
+				<br />
+				<!-- Corresponds to getSomeProperty and setSomeProperty -->
+				<!-- Calls "someActionControllerMethod" and uses return value as base name of page to navigate to. -->
+				<h:commandButton value="Go to Page B"
+					action="#{someBean.someActionControllerMethod}" />
+			</h:form>
+		</fieldset>
+	</div>
+
+	
+
+
+
+	<p style="font-size: 60%; text-align: center;">
+		<a href="../">HOME</a>
+	</p>
+
+</h:body>
+</html>
