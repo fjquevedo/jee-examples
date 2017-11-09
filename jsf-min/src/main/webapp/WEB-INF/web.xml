@@ -2,7 +2,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
                         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<display-name>JSF min</display-name>
+	<module-name>jsf-min</module-name>
+	<display-name>jsf min</display-name>
 
 	<context-param>
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
@@ -13,9 +14,7 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-	<welcome-file-list>
-		<welcome-file>index.jsf</welcome-file>
-	</welcome-file-list>
+	
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -23,19 +22,16 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
-
+	
 	<!-- If you go to http://host/project/ (with no file name), it will try 
 		index.jsf first, welcome.jsf next, and so forth. -->
 	<welcome-file-list>
-		<welcome-file>index.jsf</welcome-file>
-		<welcome-file>welcome.jsf</welcome-file>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>
