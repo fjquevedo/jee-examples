@@ -7,7 +7,24 @@
 
 	var invocation = new XMLHttpRequest();
 	var url = 'https://localhost:9443/websocket-v1/';
+	var ws = 'ws://localhost:8080/websocket-min/endpoint1';
 	var invocationHistoryText;
+	
+	var wsConnection;
+	
+	function openConnection(){
+		wsConnection = new WebSocket(ws);
+		console.log("Open connection ...");
+	}
+	
+	function sendMessage(){
+		wsConnection.send("Here's some text that the server is urgently awaiting!");
+	}
+	
+	function closeConnection() {
+		wsConnection.close();
+		console.log("Close connection ...");
+	}
 
 	function callOtherDomain() {
 		if (invocation) {
@@ -46,6 +63,16 @@
 	<p>
 		<input type="button" value="Click to Invoke Another Site"
 			onclick="callOtherDomain()">
+	</p>
+	
+	<p>
+		<input type="button" value="Open websocket" onclick="openConnection()">
+	</p>
+	<p>
+		<input type="button" value="Send Message" onclick="sendMessage()">
+	</p>
+	<p>
+		<input type="button" value="Close websocket" onclick="closeConnection()">
 	</p>
 
 	<div id="sse"></div>
