@@ -10,7 +10,7 @@ import javax.websocket.Session;
 public class ProgrammaticEndpoint extends Endpoint {
 
 	// TODO: carga al iniciar la aplicación
-	// ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/endpoint2").build();
+	// ServerEndpointConfig.Builder.create(ProgrammaticEndpoint.class, "/endpoint").build();
 
 	@OnOpen
 	public void open(Session session) {

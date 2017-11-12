@@ -7,13 +7,12 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/endpoint1")
+@ServerEndpoint("/endpoint")
 public class AnnotatedEndPoint {
 
 	@OnMessage
-	public String mensaje(String mensaje) {
-		System.out.println(mensaje);
-		return "hola desde el servidor el mensaje es :" + mensaje;
+	public String message(String message) {
+		return "The server has received: " + message;
 	}
 
 	@OnOpen
