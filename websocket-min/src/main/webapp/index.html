@@ -9,32 +9,6 @@
 
 
 <style>
-#chat {
-	width: 97%;
-}
-
-.message {
-	font-weight: bold;
-}
-
-.message:before {
-	content: ' ';
-	color: #bbb;
-	font-size: 14px;
-}
-
-#log {
-	overflow: auto;
-	max-height: 300px;
-	list-style: none;
-	padding: 0;
-}
-
-#log li {
-	border-top: 1px solid #ccc;
-	margin: 0;
-	padding: 10px 0;
-}
 
 body {
 	background: rgb(237, 237, 236);
@@ -43,62 +17,30 @@ body {
 	margin-right:0px;
 }
 
-section, header {
-	display: block;
-}
-
-#wrapper {
-	width: 600px;
-	margin: 0 auto;
-	background: #fff;
-	border-radius: 10px;
-	border-top: 1px solid #fff;
-	padding-bottom: 16px;
-}
-
-h1 {
-	padding-top: 10px;
-}
-
-h2 {
-	font-size: 100%;
-	font-style: italic;
-}
-
-header, article>* {
-	margin: 20px;
-}
-
-#status {
+#wsStatus {
 	padding: 5px;
 	color: #fff;
 	background: #ccc;
+	font-weight: bold;
 }
 
-#status.fail {
-	background: #ccc;
+#wsStatus.success {
+	background: #4caf50;	
+	font-weight: bold;
 }
 
-#status.success {
+#wsStatus.fail {
 	background: #4CAF50;
 }
 
-#status.offline {
+#wsStatus.offline {
 	background: #c00;
 }
 
-#status.online {
+#wsStatus.online {
 	background: #0c0;
 }
 
-#html5badge {
-	margin-left: -30px;
-	border: 0;
-}
-
-#html5badge img {
-	border: 0;
-}
 </style>
 
 
@@ -110,35 +52,26 @@ header, article>* {
 	<div>
 		<input id="btnOpen" type="button" value="Open websocket"
 			onclick="openConnection()"/>
-			<input id="btnClose" type="button"
+			<input id="btnClose" type="button" disabled="disabled"
 			value="Close websocket" onclick="closeConnection()"/>
 	</div>
 
-	<p id="status">Not connected</p>
-
-	<p>
-		Users connected: <span id="connected">0 </span>
-	</p>
+	<p id="wsStatus">Not connected</p>
 
 	<form onsubmit="addMessage(); return false;">
-		<input type="text" id="chat"
-			placeholder="type and press enter to chat" />
+		<input id="input" type="text"  placeholder="type and press enter" />
 	</form>
 
 	<ul id="log"></ul>
-
-
-
 
 </div>
 	
 	<script type="text/javascript">
 		var ws = 'ws://localhost:8080/websocket-min/endpoint';
 
-		connected = document.getElementById("connected");
 		log = document.getElementById("log");
-		chat = document.getElementById("chat");
-		state = document.getElementById("status");
+		input = document.getElementById("input");
+		wsStatus = document.getElementById("wsStatus");
 
 		var btnOpen = document.getElementById("btnOpen");
 		var btnClose = document.getElementById("btnClose");
@@ -166,21 +99,25 @@ header, article>* {
 		function closeConnection() {
 			console.log("Closing connection ...");
 			btnClose.disabled = true;
+			input.value = "";
+			input.disabled = true;			
 			wsConnection.close();
 		}
 
 		function onOpen(evt) {
 			console.log("Connection established ...");			
-			btnClose.disabled = false;
-			state.className = "success";
-			state.innerHTML = "Connected to server";
+			btnClose.disabled = false;			
+			input.disabled = false;
+			input.value = "";
+			wsStatus.className = "success";
+			wsStatus.innerHTML = "Connected to server";
 		}
 
 		function onClose(evt) {
 			console.log("Connection closed ...");
-			btnOpen.disabled = false;
-			state.className = "fail";
-			state.innerHTML = "Not connected";
+			btnOpen.disabled = false;			
+			wsStatus.className = "";
+			wsStatus.innerHTML = "Not connected";
 
 		}
 
@@ -197,44 +134,17 @@ header, article>* {
 		}
 
 		function onError(evt) {
-			state.className = "fail";
-			state.innerHTML = "Communication error";
+			wsStatus.className = "fail";
+			wsStatus.innerHTML = "Communication error";
 		}
 
 		function addMessage() {
-			var message = chat.value;
-			chat.value = "";
+			var message = input.value;
+			input.value = "";
 			wsConnection.send(message);
 		}
 
-		function callOtherDomain() {
-			if (invocation) {
-				invocation.open('GET', url, true);
-				invocation.onreadystatechange = handler;
-				invocation.setRequestHeader('Content-Type', 'application/xml');
-				invocation.send();
-			} else {
-				invocationHistoryText = "No Invocation TookPlace At All";
-				var textNode = document.createTextNode(invocationHistoryText);
-				var textDiv = document.getElementById("sse");
-				textDiv.appendChild(textNode);
-			}
-
-		}
-		function handler(evtXHR) {
-			if (invocation.readyState == 4) {
-				if (invocation.status == 200) {
-					var response = invocation.response;
-					//var invocationHistory = response.getElementsByTagName('invocationHistory').item(0).firstChild.data;
-					//invocationHistoryText = document.createTextNode(invocationHistory);
-					var textDiv = document.getElementById("sse");
-					textDiv.append(response);
-
-				} else
-					alert("Invocation Errors Occured");
-			} else
-				dump("currently the application is at" + invocation.readyState);
-		}
+		
 	</script>
 
 </body>
