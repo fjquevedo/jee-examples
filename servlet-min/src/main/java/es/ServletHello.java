@@ -1,19 +1,28 @@
 package es;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/sayhello", "/sayhi"})
+import com.integration.CUDInterface;
+import com.integration.RInterface;
+
+@WebServlet(urlPatterns = { "/sayhello", "/sayhi" })
 public class ServletHello extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private CUDInterface cudProvider;
+
+	@Inject
+	private RInterface rProvider;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -22,6 +31,12 @@ public class ServletHello extends HttpServlet {
 		// Allocate a output writer to write the response message into the
 		// network socket
 		PrintWriter out = response.getWriter();
+
+		System.out.println(rProvider.getInfo());
+		cudProvider.deleteInfo();
+		System.out.println(rProvider.getInfo());
+		System.out.println(cudProvider.updateInfo("hola de nuevo"));
+		System.out.println(rProvider.getInfo());
 
 		// Write the response message, in an HTML page
 		try {
@@ -38,10 +53,11 @@ public class ServletHello extends HttpServlet {
 			out.println("<p>Remote Address: " + request.getRemoteAddr() + "</p>");
 			// Generate a random number upon each request
 			out.println("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
-			
+
 			out.println("<p style=\"font-size: 60%; text-align: center;\"><a href=\"./\">HOME</a></p>");
-			out.println("<p style=\"font-size: 60%; text-align: center;\"><a href=\"./samples/samples.html\">SAMPLES</a></p>");
-			
+			out.println(
+					"<p style=\"font-size: 60%; text-align: center;\"><a href=\"./samples/samples.html\">SAMPLES</a></p>");
+
 			out.println("</body>");
 			out.println("</html>");
 		} finally {
