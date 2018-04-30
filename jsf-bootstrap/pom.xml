@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jsf-bootstrap</artifactId>
+	<packaging>war</packaging>
+	<name>jsf-bootstrap</name>
+	<parent>
+		<groupId>jee-examples</groupId>
+		<artifactId>jee-examples</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<profiles>
+		<profile>
+			<id>tomcat</id>
+			<dependencies>
+				<!-- javax.faces-xxx.jar or (jsf-api-xxx.jar (javax.faces) + jsf-impl-xxx.jar (com.sun.faces)) -->
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.2.14</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+</project>
