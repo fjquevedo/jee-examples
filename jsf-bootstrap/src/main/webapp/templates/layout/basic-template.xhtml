@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<title><ui:insert name="title">Default title</ui:insert></title>
+
+	<h:outputStylesheet library="webjars" name="bootstrap/4.1.0/css/bootstrap.min.css" />
+
+	<h:outputStylesheet name="css/simple-sidebar.css" />
+
+</h:head>
+<h:body>
+
+
+<!-- Menús, headers y todo lo que vaya antes del contenido -->
+	<div>
+		Aquí podríamos por ejemplo poner un menú arriba del
+		contenido común a todas las páginas que usen el template.
+	</div>
+
+	<ui:insert name="contenido">
+		Contenido por defecto para que no quede en blanco...    
+	</ui:insert>
+
+	<!-- Footer y otros componentes que vayan después del contenido -->
+	<div>
+		Footer con información de contacto (común a todas las páginas).
+	</div>
+
+	<!-- load js at bottom for faster loading-->
+	<h:outputScript library="webjars" name="jquery/3.3.1/jquery.min.js" />
+	<h:outputScript library="webjars"
+		name="bootstrap/4.1.0/js/bootstrap.min.js" />
+</h:body>
+</html>
