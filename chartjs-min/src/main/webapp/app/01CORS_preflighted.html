@@ -1,0 +1,101 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Simple use of Cross-Site XMLHttpRequest (Using Access
+	Control)</title>
+<script type="text/javascript">
+	//<![CDATA[
+
+	var invocation = new XMLHttpRequest();
+	var url = 'http://aruner.net/resources/access-control-with-get/';
+	var invocationHistoryText;
+
+	function callOtherDomain() {
+		if (invocation) {
+			invocation.open('GET', url, true);
+			invocation.onreadystatechange = handler;
+			invocation.send();
+		} else {
+			invocationHistoryText = "No Invocation TookPlace At All";
+			var textNode = document.createTextNode(invocationHistoryText);
+			var textDiv = document.getElementById("textDiv");
+			textDiv.appendChild(textNode);
+		}
+
+	}
+	function handler(evtXHR) {
+		if (invocation.readyState == 4) {
+			if (invocation.status == 200) {
+				var response = invocation.responseXML;
+				var invocationHistory = response.getElementsByTagName(
+						'invocationHistory').item(0).firstChild.data;
+				invocationHistoryText = document
+						.createTextNode(invocationHistory);
+				var textDiv = document.getElementById("textDiv");
+				textDiv.appendChild(invocationHistoryText);
+
+			} else
+				alert("Invocation Errors Occured");
+		} else
+			dump("currently the application is at" + invocation.readyState);
+	}
+
+	function loadXMLDoc() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("demo").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "https://www.w3schools.com/xml/xmlhttp_info.txt",
+				true);
+		xhttp.send();
+	}
+	//]]>
+</script>
+</head>
+<body>
+	<p>Cross-origin resource sharing (CORS) Mécanismo que permite
+		cross-request de recursos entre dominios diferentes. Por ejemplo una
+		página de un domino http://domain-a.com puede incrustar recursos
+		(images, stylesheets, scripts, iframes, and videos) alojados en otro
+		dominio http://domain-b. CORS define la manera que un navegador y el
+		servidor determinan si es seguro permitir solicitudes cross-origin
+		(Same-origin policy:
+		https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).
+	</p>
+	
+	<p>
+		XMLHttpRequest: https://developer.mozilla.org/es/docs/XMLHttpRequest/Using_XMLHttpRequest
+	</p>
+
+	<p>
+	</p>
+
+	<form id="controlsToInvoke" action="">
+		<p>
+			<input type="button" value="Call Other Domain"
+				onclick="callOtherDomain()" />
+		</p>
+
+		<p>
+			<button type="button" onclick="loadXMLDoc()">Change Content</button>
+		</p>
+	</form>
+	<p id="intro">
+		This page basically makes invocations to another domain using
+		cross-site XMLHttpRequest mitigated by Access Control. This is the
+		simple scenario that is <em>NOT</em> preflighted, and the invocation
+		to a resource on another domain takes place using a simple HTTP GET.
+	</p>
+	<div id="textDiv">This XHTML document invokes another resource
+		using cross-site XHR. And this XML document resides on another domain
+		and has been invoked cross-site. If this data is ever displayed, it is
+		because it has emerged from DOM manipulations on responseXML following
+		a cross-site invocation.</div>
+
+	<p id="demo"></p>
+
+</body>
+</html>
