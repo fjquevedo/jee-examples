@@ -1,8 +1,10 @@
-package es;
+package es.panel;
 
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -47,6 +49,13 @@ public class UserWizard implements Serializable {
         }
         else {
             return event.getNewStep();
+        }
+    }
+    
+    public void validateStep1(FacesContext context, UIComponent component, Object value) throws ValidatorException  {
+    	boolean condition = false;
+        if (condition) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Validtion message", "Validation summary"));
         }
     }
 }

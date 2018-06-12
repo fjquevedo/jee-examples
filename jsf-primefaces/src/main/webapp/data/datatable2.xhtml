@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+<h1>Data - DataTable</h1>
+	<h:form id="launchForm">
+
+	<h:panelGroup id="panelSearchTeams" layout="block">
+		<!-- ******** SEARCH BUTTON, INVITE TEAM ******* -->
+		<h:panelGroup layout="block">
+			<p:panelGrid>
+				<p:row>
+					<p:column style="width:70%">
+					</p:column>
+					<p:column styleClass="right">
+						<!-- al seleccionar team se añade a lista (botón solamente actualiza la lista.) -->
+						<p:commandButton value="INVITE"
+							actionListener="#{ctfTeamBean.inviteTeams}"
+							styleClass=""
+							update="launchForm:panelTeamList launchForm:panelInvitedTeams" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</h:panelGroup>
+
+		<!-- ********* TEAM LIST ********** -->
+		<h:panelGroup id="panelTeamList" layout="block">
+			<p:dataTable id="checkTeams"														
+				value="#{ctfTeamBean.cars6}"
+				var="ctfTeam" rows="5" paginatorPosition="bottom"
+				paginator="#{ctfTeamBean.cars6.size() > 5}"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink}"
+				rowKey="#{ctfTeam.id}"
+				selection="#{ctfTeamBean.selectedTeams}"
+				sortBy="#{ctfTeam.brand}"
+				sortOrder="ascending">
+
+				<p:column selectionMode="multiple"  style="width:16px;text-align:center" />
+				<p:column>
+					<h:graphicImage value="" />
+					<h:outputText value="#{ctfTeam.id}" />					
+				</p:column>
+				<p:column>
+					
+				</p:column>
+				<p:column>#{ctfTeam.brand}</p:column>
+			</p:dataTable>
+		</h:panelGroup>
+	</h:panelGroup>
+	
+	<!-- ****** INVITED TEAMS ****** -->
+	<h:panelGroup layout="block" styleClass="col-5">
+		<h2>Equipos</h2>
+		<br />
+		<h:panelGroup id="panelInvitedTeams" layout="block" styleClass="padding10">
+			<p:panelGrid style="width:100%">
+				<p:dataTable id="invitedTeams"
+					emptyMessage="#No hay equipos seleccionados."
+					value="#{ctfTeamBean.invitedTeams}"
+					var="invTeam" rows="5" paginatorPosition="bottom"
+					paginator="#{ctfTeamBean.invitedTeams.size() > 5}"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink}" rowKey="#{invTeam.id}">
+					<p:column>
+						<h:outputText value="#{invTeam.id} #{invTeam.brand} " />
+					</p:column>
+				</p:dataTable>
+			</p:panelGrid>
+		</h:panelGroup>
+	</h:panelGroup>
+
+	</h:form>
+</h:body>
+</html>

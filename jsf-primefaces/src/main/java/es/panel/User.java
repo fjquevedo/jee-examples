@@ -1,4 +1,4 @@
-package es;
+package es.panel;
 
 import java.io.Serializable;
 
