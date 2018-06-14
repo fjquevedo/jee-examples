@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
@@ -17,7 +19,7 @@ import es.domain.Car;
  
 @ManagedBean(name="ctfTeamBean")
 @ViewScoped
-public class CtfTeamBean implements Serializable {
+public class SelectionCarBean implements Serializable {
      
     private List<Car> cars1;
     private List<Car> cars2;
@@ -28,13 +30,31 @@ public class CtfTeamBean implements Serializable {
     private Car selectedCar;
     private List<Car> selectedCars;
     
+    private DataTable myTable = new DataTable();
+    
     private List<Car> invitedTeams;
     private List<Car> selectedTeams;
     
     @ManagedProperty("#{carService}")
     private CarService service;
      
-    @PostConstruct
+    /**
+	 * @return the myTable
+	 */
+	public DataTable getMyTable() {
+		return myTable;
+	}
+
+	/**
+	 * @param myTable the myTable to set
+	 */
+	public void setMyTable(DataTable myTable) {
+		this.myTable = myTable;
+	}
+
+
+
+	@PostConstruct
     public void init() {
         cars1 = service.createCars(10);
         cars2 = service.createCars(10);
@@ -43,6 +63,8 @@ public class CtfTeamBean implements Serializable {
         cars5 = service.createCars(10);
         cars6 = service.createCars(10);
     }
+    
+    
  
     public List<Car> getCars1() {
         return cars1;
@@ -98,8 +120,6 @@ public class CtfTeamBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    
-    
     /**
 	 * @return the invitedTeams
 	 */
@@ -126,6 +146,7 @@ public class CtfTeamBean implements Serializable {
 	 */
 	public void setSelectedTeams(List<Car> selectedTeams) {
 		this.selectedTeams = selectedTeams;
+		
 	}
 
 	/**
@@ -134,5 +155,13 @@ public class CtfTeamBean implements Serializable {
      */
     public void inviteTeams() {
     	invitedTeams = selectedTeams;
+    	
+    	System.out.println(myTable.getFirst());
+    	System.out.println(myTable.getPage());
+    	System.out.println(myTable.getRows());
+    	myTable.reset();
+    	
+    	//myTable.setFirst(0);
+    	System.out.println(myTable.getTabindex());    	
     }
 }

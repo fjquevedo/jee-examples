@@ -26,7 +26,8 @@
 						<p:commandButton value="INVITE"
 							actionListener="#{ctfTeamBean.inviteTeams}"
 							styleClass=""
-							update="launchForm:panelTeamList launchForm:panelInvitedTeam0 launchForm:panelInvitedTeams" />
+							onclick="invitedTeams.getPaginator().setPage(0);"
+							update="launchForm:panelInvitedTeam0"/>
 					</p:column>
 				</p:row>
 			</p:panelGrid>
@@ -34,24 +35,23 @@
 
 		<!-- ********* TEAM LIST ********** -->
 		<h:panelGroup id="panelTeamList" layout="block">
-			<p:dataTable id="checkTeams"														
+			<p:dataTable id="checkTeams"
 				value="#{ctfTeamBean.cars6}"
 				var="ctfTeam" rows="5" paginatorPosition="bottom"
 				paginator="#{ctfTeamBean.cars6.size() > 5}"
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink}"
 				rowKey="#{ctfTeam.id}"
 				selection="#{ctfTeamBean.selectedTeams}"
+				rowSelectMode="multiple"
 				sortBy="#{ctfTeam.brand}"
 				sortOrder="ascending">
 
-				<p:column selectionMode="multiple"  style="width:16px;text-align:center" />
+				<p:column selectionMode="multiple"   style="width:16px;text-align:center" />
 				<p:column>
 					<h:graphicImage value="" />
 					<h:outputText value="#{ctfTeam.id}" />					
 				</p:column>
-				<p:column>
-					
-				</p:column>
+
 				<p:column>#{ctfTeam.brand}</p:column>
 			</p:dataTable>
 		</h:panelGroup>
@@ -65,9 +65,11 @@
 			<p:panelGrid style="width:100%">
 				<p:dataTable id="invitedTeams"
 					emptyMessage="#No hay equipos seleccionados."
+					binding="#{ctfTeamBean.myTable}"
 					value="#{ctfTeamBean.invitedTeams}"
-					var="invTeam" rows="5" paginatorPosition="bottom"
-					paginator="#{ctfTeamBean.invitedTeams.size() > 5}"
+					widgetVar="myWidgetVar"
+					var="invTeam" rows="3" paginatorPosition="bottom"
+					paginator="#{ctfTeamBean.invitedTeams.size() > 3}"
 					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink}" rowKey="#{invTeam.id}">
 					<p:column>
 						<h:outputText value="#{invTeam.id} #{invTeam.brand} " />
