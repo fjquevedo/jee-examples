@@ -1,4 +1,4 @@
-package es.domain;
+package es.data;
 
 public class Car {
 		

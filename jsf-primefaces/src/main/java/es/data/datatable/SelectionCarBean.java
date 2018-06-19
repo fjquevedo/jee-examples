@@ -13,7 +13,7 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
-import es.domain.Car;
+import es.data.Car;
 
 
  

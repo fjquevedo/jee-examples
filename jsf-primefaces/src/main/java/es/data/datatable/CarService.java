@@ -7,7 +7,7 @@ import java.util.UUID;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import es.domain.Car;
+import es.data.Car;
 
 @ManagedBean(name = "carService")
 @ApplicationScoped
