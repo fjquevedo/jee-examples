@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import es.data.Car;
-import es.data.datatable.CarService;
+import es.service.CarService;
 
 @ManagedBean
 @ViewScoped

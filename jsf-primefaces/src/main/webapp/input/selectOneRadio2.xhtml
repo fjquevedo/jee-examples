@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<h1>Input - SelectOneRadio</h1>
+
+	<h:form>
+
+ 
+    <h3>Grid</h3>
+    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <p:outputLabel for="car" value="Car:" />
+        <p:selectOneRadio id="car" value="#{selectionRadioBean.car}"  layout="grid" columns="3">
+            <f:selectItems value="#{selectionRadioBean.cars1}" var="c" itemLabel="#{car.id}" itemValue="#{car.id}"/>
+        </p:selectOneRadio>
+    </h:panelGrid>
+ 
+</h:form>
+
+</h:body>
+</html>
