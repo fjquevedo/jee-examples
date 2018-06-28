@@ -14,6 +14,8 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
 import es.data.Car;
+import es.data.Children;
+import es.data.Parent;
 import es.service.CarService;
 
 
@@ -31,10 +33,13 @@ public class SelectionCarBean implements Serializable {
     private Car selectedCar;
     private List<Car> selectedCars;
     
+    
     private DataTable myTable = new DataTable();
     
     private List<Car> invitedTeams;
     private List<Car> selectedTeams;
+    
+
     
     @ManagedProperty("#{carService}")
     private CarService service;
@@ -63,6 +68,8 @@ public class SelectionCarBean implements Serializable {
         cars4 = service.createCars(10);
         cars5 = service.createCars(10);
         cars6 = service.createCars(10);
+        
+        
     }
     
     
@@ -90,8 +97,10 @@ public class SelectionCarBean implements Serializable {
     public List<Car> getCars6() {
         return cars6;
     }
-     
-    public void setService(CarService service) {
+    
+
+
+	public void setService(CarService service) {
         this.service = service;
     }
  
@@ -110,8 +119,8 @@ public class SelectionCarBean implements Serializable {
     public void setSelectedCars(List<Car> selectedCars) {
         this.selectedCars = selectedCars;
     }
-     
-    public void onRowSelect(SelectEvent event) {
+    
+	public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Car Selected", ((Car) event.getObject()).getId());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

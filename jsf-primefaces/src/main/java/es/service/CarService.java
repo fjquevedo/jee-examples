@@ -8,6 +8,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import es.data.Car;
+import es.data.Children;
+import es.data.Parent;
 
 @ManagedBean(name = "carService")
 @ApplicationScoped
@@ -48,6 +50,25 @@ public class CarService {
 		for (int i = 0; i < size; i++) {
 			list.add(new Car(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(),
 					getRandomSoldState()));
+		}
+
+		return list;
+	}
+
+	public List<Parent> createParents(int parentSize, int childrenSize) {
+		List<Parent> list = new ArrayList<Parent>();
+		for (int i = 0; i < parentSize; i++) {
+			String parentId = getRandomId();
+			list.add(new Parent(parentId, getRandomBrand(), getRandomColor(), createChildren(childrenSize, parentId)));
+		}
+
+		return list;
+	}
+
+	public List<Children> createChildren(int childrenSize, String parentId) {
+		List<Children> list = new ArrayList<Children>();
+		for (int i = 0; i < childrenSize; i++) {
+			list.add(new Children(getRandomId(), parentId, getRandomBrand(), getRandomColor()));
 		}
 
 		return list;

@@ -12,6 +12,8 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
 import es.data.Car;
+import es.data.Children;
+import es.data.Parent;
 import es.service.CarService;
 
 
@@ -29,6 +31,10 @@ public class SelectionView implements Serializable {
     private Car selectedCar;
     private List<Car> selectedCars;
     
+    private List<Parent> parents;
+    private Parent selectedParent;
+    private Children selectedChildren;
+    
     @ManagedProperty("#{carService}")
     private CarService service;
      
@@ -40,6 +46,8 @@ public class SelectionView implements Serializable {
         cars4 = service.createCars(10);
         cars5 = service.createCars(10);
         cars6 = service.createCars(10);
+        
+        parents = service.createParents(2, 3);
     }
  
     public List<Car> getCars1() {
@@ -65,6 +73,10 @@ public class SelectionView implements Serializable {
     public List<Car> getCars6() {
         return cars6;
     }
+    
+    public List<Parent> getParents() {
+		return parents;
+	}
      
     public void setService(CarService service) {
         this.service = service;
@@ -75,6 +87,7 @@ public class SelectionView implements Serializable {
     }
  
     public void setSelectedCar(Car selectedCar) {
+    	System.out.println("selected CAr" + selectedCar);
         this.selectedCar = selectedCar;
     }
  
@@ -85,6 +98,25 @@ public class SelectionView implements Serializable {
     public void setSelectedCars(List<Car> selectedCars) {
         this.selectedCars = selectedCars;
     }
+    
+    
+    public Parent getSelectedParent() {
+		return selectedParent;
+	}
+
+	public void setSelectedParent(Parent selectedParent) {
+		System.out.println("select Parent: " + selectedParent.getId());
+		this.selectedParent = selectedParent;
+	}
+
+	public Children getSelectedChildren() {		
+		return selectedChildren;
+	}
+
+	public void setSelectedChildren(Children selectedChildren) {
+		System.out.println("select Children: " + selectedChildren.getId() + ", parentID: " + selectedChildren.getParentID());
+		this.selectedChildren = selectedChildren;
+	}    
      
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Car Selected", ((Car) event.getObject()).getId());
