@@ -15,7 +15,10 @@
 	<h1>Data - Carousel</h1>
 
 	<h:form id="form">
-    <p:carousel value="#{carouselView.cars}" headerText="Custom" var="car" itemStyle="height:200px;text-align:center" numVisible="1" easing="easeOutBounce" style="width:250px" circular="true">    
+    <p:carousel value="#{carouselView.cars}"
+    	binding="#{carouselView.carousel}"
+    	widgetVar="carousel"
+    	headerText="Custom" var="car" itemStyle="height:200px;text-align:center" numVisible="1" easing="easeOutBounce" style="width:250px" circular="true">    
     <p:column>
       <p:commandLink actionListener="#{carouselView.setSelectedCar(car)}">
 	        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
@@ -43,8 +46,8 @@
         </h:panelGrid>
       </p:commandLink>
     </p:column>
+    	<p:ajax event="click"  onComplete="#{carouselView.selectedCar}"  />
     </p:carousel> 
-
 
     <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="carDetail" style="text-align:center;">

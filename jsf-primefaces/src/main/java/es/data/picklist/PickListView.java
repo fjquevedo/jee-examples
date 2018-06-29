@@ -54,6 +54,21 @@ public class PickListView {
 	public void setCities(DualListModel<String> cities) {
 		this.cities = cities;
 	}
+	
+	public void onTransfer(TransferEvent event) {
+		System.out.print("Event:");
+		if (event.isAdd()) {
+			System.out.println("Event add");
+			for (Object item : event.getItems()) {
+				System.out.println(item);
+			}
+		} else if (event.isRemove()) {
+			System.out.println("Event remove");
+			for (Object item : event.getItems()) {
+				System.out.println(item);
+			}
+		}
+	}
 
 //	public ThemeService getService() {
 //		return service;
