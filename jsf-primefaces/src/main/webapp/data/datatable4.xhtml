@@ -11,14 +11,12 @@
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
-	<h1>Data - DataTable</h1>
-	<h:form id="launchForm">
-
+	<h1>Data - DataTable - Parent Children</h1>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
 		<p:dataTable id="parentDT" var="parent" value="#{dtSelectionView.parents}" selectionMode="single"
-			selection="#{dtSelectionView.selectedParent}" rowKey="#{parent.id}">
-			<f:facet name="header">
-            Single with Row Click
-        	</f:facet>
+			selection="#{dtSelectionView.selectedParent}" rowKey="#{parent.id}" >
+			<p:ajax event="rowSelect" listener="#{dtSelectionView.onRowSelectParent}" />
 			<p:column headerText="Id">
 				<h:outputText value="#{parent.id}" />
 			</p:column>
@@ -29,12 +27,10 @@
 				<h:outputText value="#{parent.description}" />
 			</p:column>
 			
-			<p:column headerText="Children">			
-			<p:dataTable id="childrenDT" var="children" value="#{parent.children}" selectionMode="single"
-				selection="#{dtSelectionView.selectedChildren}" rowKey="#{children.id}">
-				<f:facet name="header">
-	            	Single with Row Click
-	        	</f:facet>
+			<p:column headerText="Children">
+			<p:dataTable id="childrenDT" var="children" value="#{parent.children}" selectionMode="single" 
+				selection="#{dtSelectionView.selectedChildren}" rowKey="#{children.id}" >
+				<p:ajax event="rowSelect" listener="#{dtSelectionView.onRowSelectChildren}" />
 				<p:column headerText="Id">
 					<h:outputText value="#{children.id}" />
 				</p:column>
@@ -46,12 +42,11 @@
 				</p:column>
 				<p:column headerText="Description">
 					<h:outputText value="#{parent.description}" />
-				</p:column>				
-			</p:dataTable>			
+				</p:column>
+				
+			</p:dataTable>
 			</p:column>
-			
 		</p:dataTable>
-
 	</h:form>
 </h:body>
 </html>

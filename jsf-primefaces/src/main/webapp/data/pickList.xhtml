@@ -19,8 +19,10 @@
  
     <h3 style="margin-top: 0">Basic PickList</h3>
     <p:pickList id="pickList" value="#{pickListView.cities}" var="cities" itemLabel="#{cities}" itemValue="#{cities}"
-    	showSourceFilter="true" showTargetFilter="true"
-    	filterMatchMode="contains" />
+    	showSourceFilter="true" showTargetFilter="true" immediate="true"
+    	filterMatchMode="contains">
+ 		<p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+    </p:pickList>
  
     <p:commandButton id="citySubmit" value="Submit" update="displayCities" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
 
