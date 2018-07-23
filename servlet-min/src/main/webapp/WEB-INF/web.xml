@@ -1,8 +1,14 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
                         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<module-name>servlet-min</module-name>
 	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<param-name>nombre</param-name>
+		<param-value>paco</param-value>
+	</context-param>
 
 </web-app>
